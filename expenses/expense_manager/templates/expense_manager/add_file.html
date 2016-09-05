@@ -1,0 +1,10 @@
+{% extends 'expense_manager/expense_manager_base_layout.html' %}
+{% block content %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="w3-container w3-margin">
+            <input type="submit" class="w3-btn w3-white w3-border w3-border-green w3-round-xlarge" value="Save Expense">
+        </div>
+    </form>
+{% endblock %}

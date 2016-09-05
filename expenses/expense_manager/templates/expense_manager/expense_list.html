@@ -1,0 +1,11 @@
+{% extends 'expense_manager/expense_manager_base_layout.html' %}
+{% block content %}
+<h2>צפה בהוצאות</h2>
+{% autoescape off %}
+<input class="w3-margin" type="text" id="nameInput" onkeyup="filter_table_by_name()" placeholder="Search for names..">
+<input class="w3-margin" type="text" id="typeInput" onkeyup="filter_table_by_type()" placeholder="Search for types..">
+<form>
+    {{ table }}
+</form>
+{% endautoescape %}
+{% endblock %}

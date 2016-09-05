@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <title>Expense Manager</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<h2 class="w3-jumbo">Barak Capital - Expenses app</h2>
+<ul class="w3-navbar w3-blue">
+    <a href="#" onclick="w3_close()" class="w3-closenav w3-hide-large">Close &times;</a>
+    <li><a href="{% url 'expensesForm' %}">Add Expense</a></li>
+    <li><a href="{% url 'expenseList' %}">View Expenses</a></li>
+    <li><a href="#">Edit Expenses</a></li>
+    <li><a href="#">Manage Traders</a></li>
+    <li><a href="#">Notes Manager</a></li>
+</ul>
+{% block content %}{% endblock %}
+
+</body>
+<script>
+function filter_table_by_name() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("nameInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function filter_table_by_type() {
+  // Declare variables
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("typeInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+</html>
