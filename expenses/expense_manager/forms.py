@@ -1,5 +1,6 @@
 from django import forms
 from functools import partial
+import openpyxl
 
 from . import models
 
@@ -19,3 +20,10 @@ class NewExpenseForm(forms.ModelForm):
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
+
+    def clean_file(self):
+        file = self.cleaned_data['file']
+        try:
+            openpyxl.load_workbook(file)
+        except:
+            raise forms.ValidationError("Not an excel file")

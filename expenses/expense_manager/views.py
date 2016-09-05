@@ -76,3 +76,21 @@ def create_expenses_from_file(file):
                 print(expense)
 
 
+def file_upload(request):
+    form = forms.UploadFileForm()
+    if request.method == 'POST':
+        form = forms.UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES['file']
+            ws = openpyxl.load_workbook(file).get_sheet_by_name('Office')
+            rows_from_excel = []
+            for i, row in enumerate(ws.iter_rows()):
+                if i == 0:
+                    columns = [header.value for header in row]
+                else:
+                    rows_from_excel.append([value.value for value in row])
+            df = pandas.DataFrame(columns=columns, data=rows_from_excel)
+            df.to_json("test.json", orient='records')
+            return HttpResponseRedirect(reverse('uploadFile'))
+    return render(request, 'expense_manager/add_file.html', {'form': form})
+
