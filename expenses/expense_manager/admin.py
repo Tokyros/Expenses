@@ -7,3 +7,4 @@ admin.site.register(models.Portfolio)
 
 print("This is home")
 print("This is adding")
+print("This is something else")
